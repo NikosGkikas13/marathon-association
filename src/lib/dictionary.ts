@@ -94,7 +94,6 @@ const el = {
     categories: "Κατηγορίες",
     allCategories: "Όλες οι κατηγορίες",
     noResults: "Κανένα μέλος δεν ταιριάζει στην αναζήτηση.",
-    featured: "Προτεινόμενο μέλος",
   },
   member: {
     services: "Τι προσφέρει",
@@ -103,7 +102,6 @@ const el = {
     location: "Τοποθεσία",
     directions: "Οδηγίες πλοήγησης",
     call: "Κλήση",
-    memberBadge: "Μέλος του συλλόγου",
     placeholderNote: "Τα στοιχεία επικοινωνίας και οι ώρες είναι δείγμα.",
     back: "← Όλα τα μέλη",
     others: "Άλλα μέλη — ",
@@ -262,7 +260,6 @@ const en: Dictionary = {
     categories: "Categories",
     allCategories: "All categories",
     noResults: "No member matches that search.",
-    featured: "Featured member",
   },
   member: {
     services: "What they offer",
@@ -271,7 +268,6 @@ const en: Dictionary = {
     location: "Location",
     directions: "Get directions",
     call: "Call",
-    memberBadge: "Association member",
     placeholderNote: "Contact details and hours are placeholder values.",
     back: "← All members",
     others: "Other members — ",

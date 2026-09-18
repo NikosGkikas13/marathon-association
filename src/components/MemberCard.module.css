@@ -13,33 +13,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* — featured — */
-.featured {
-  display: flex;
-  flex-direction: column;
-  background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-.featuredMedia { overflow: hidden; }
-.featuredPhoto { aspect-ratio: 16 / 9; }
-.featuredBody { display: flex; flex-direction: column; gap: 7px; padding: 16px 17px 17px; }
-.featuredTop { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.badge {
-  font-size: 9.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-accent-700);
-  border: 1px solid var(--color-accent-300);
-  padding: 3px 7px;
-  border-radius: var(--radius-md);
-}
-.featured .name { font-size: 20px; }
-.featured .desc { margin-top: 2px; font-size: 13.5px; line-height: 1.5; }
-.featured .meta { gap: 8px 14px; margin-top: 6px; font-size: 12.5px; }
-.featured .tel { margin-top: 4px; padding: 4px 0; font-size: 14px; }
-
 /* — standard / compact — */
 .standard {
   display: flex;
@@ -65,8 +38,7 @@
   .standardBody { gap: 3px; }
   .kicker { font-size: 9.5px; }
   .name { font-size: 15.5px; line-height: 1.18; }
-  .featured .name { font-size: 17.5px; }
   .desc { font-size: 12.5px; line-height: 1.45; }
-  .standard :global(.hover-rule), .featured :global(.hover-rule) { display: none; }
+  .standard :global(.hover-rule) { display: none; }
   .tel { min-height: 40px; display: inline-flex; align-items: center; }
 }

@@ -5,7 +5,7 @@ import { MemberCard } from "@/components/MemberCard";
 import { OpenState } from "@/components/OpenState";
 import { Photo } from "@/components/Photo";
 import { WeekHours } from "@/components/WeekHours";
-import { MEMBERS, MEMBER_CATS, MEMBER_DETAILS, getMember } from "@/content/members";
+import { MEMBERS, MEMBER_CATS, MEMBER_DETAILS, getMemberBySlug, memberSlug } from "@/content/members";
 import { getDictionary } from "@/lib/dictionary";
 import { mapsDirectionsHref, mapsSearchHref, telHref, weekHours } from "@/lib/format";
 import type { Locale } from "@/lib/i18n";
@@ -15,21 +15,21 @@ import styles from "./member.module.css";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return MEMBERS.map((m) => ({ id: m.id }));
+  return MEMBERS.map((m) => ({ slug: memberSlug(m) }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/[lang]/members/[id]">): Promise<Metadata> {
-  const { lang, id } = await params;
-  const m = getMember(id);
+export async function generateMetadata({ params }: PageProps<"/[lang]/members/[slug]">): Promise<Metadata> {
+  const { lang, slug } = await params;
+  const m = getMemberBySlug(slug);
   if (!m) return {};
   const t = memberText(m, lang as Locale);
   return { title: t.name, description: t.desc };
 }
 
-export default async function MemberPage({ params }: PageProps<"/[lang]/members/[id]">) {
-  const { lang: l, id } = await params;
+export default async function MemberPage({ params }: PageProps<"/[lang]/members/[slug]">) {
+  const { lang: l, slug } = await params;
   const lang = l as Locale;
-  const m = getMember(id);
+  const m = getMemberBySlug(slug);
   if (!m) notFound();
 
   const dict = getDictionary(lang);
@@ -120,10 +120,7 @@ export default async function MemberPage({ params }: PageProps<"/[lang]/members/
               </a>
             ) : null}
           </div>
-          <div>
-            <span className={styles.badge}>{d.memberBadge}</span>
-            <p className={`placeholder-note ${styles.note}`}>{d.placeholderNote}</p>
-          </div>
+          <p className={`placeholder-note ${styles.note}`}>{d.placeholderNote}</p>
         </aside>
       </section>
 
@@ -135,7 +132,7 @@ export default async function MemberPage({ params }: PageProps<"/[lang]/members/
           </div>
           <div className={styles.relatedGrid}>
             {sameCat.map((x) => (
-              <MemberCard key={x.id} m={x} lang={lang} common={dict.common} featuredLabel={dict.members.featured} variant="compact" />
+              <MemberCard key={x.id} m={x} lang={lang} common={dict.common} variant="compact" />
             ))}
           </div>
         </section>

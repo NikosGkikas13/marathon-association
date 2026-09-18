@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Member } from "@/content/members";
+import { memberSlug, type Member } from "@/content/members";
 import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/dictionary";
 import { telHref } from "@/lib/format";
@@ -21,7 +21,7 @@ export function MemberRow({ m, lang, dict }: { m: Member; lang: Locale; dict: Di
       <div className={styles.body}>
         <span className={styles.kicker}>{t.category}</span>
         <h3 className={styles.name}>
-          <Link href={`/${lang}/members/${m.id}`} className="stretch-link">{t.name}</Link>
+          <Link href={`/${lang}/members/${memberSlug(m)}`} className="stretch-link">{t.name}</Link>
         </h3>
         <span className="hover-rule" />
         <span className={styles.desc}>{t.desc}</span>

@@ -1,3 +1,5 @@
+import { slugify } from "@/lib/slug";
+
 // Association members shown in the directory. Phone numbers, addresses and
 // hours are placeholder values until each member confirms them.
 
@@ -16,9 +18,12 @@ export type MemberCategory = { id: MemberCategoryId; el: string; en: string };
 
 export type Member = {
   id: string;
+  /**
+   * The member's address on the site (/members/<slug>). Left out, it is made
+   * from the Greek name. Set it to keep a link stable if the name changes.
+   */
+  slug?: string;
   cat: MemberCategoryId;
-  /** Featured members get the larger card in the directory. */
-  feat?: boolean;
   el: string;
   en: string;
   dEl: string;
@@ -53,30 +58,30 @@ export const MEMBER_CATS: MemberCategory[] = [
 ];
 
 export const MEMBERS: Member[] = [
-  { id: 'b1', cat: 'bakery', feat: true, el: 'Αρτοποιείον Δημητρίου', en: 'Dimitriou Bakery', dEl: 'Ξυλόφουρνος από το 1978 — χωριάτικο, κουλούρια, τσουρέκι.', dEn: 'Wood-fired oven since 1978 — village loaves, koulouria, tsoureki.', tel: '22940 61 2xx', d: '123456', h: '06:30-14:30' },
+  { id: 'b1', cat: 'bakery', el: 'Αρτοποιείον Δημητρίου', en: 'Dimitriou Bakery', dEl: 'Ξυλόφουρνος από το 1978 — χωριάτικο, κουλούρια, τσουρέκι.', dEn: 'Wood-fired oven since 1978 — village loaves, koulouria, tsoureki.', tel: '22940 61 2xx', d: '123456', h: '06:30-14:30' },
   { id: 'b2', cat: 'bakery', el: 'Μελισσοκομία Σχινιά', en: 'Schinias Apiary', dEl: 'Θυμαρίσιο και πευκόμελο από τα μελίσσια του δάσους.', dEn: 'Thyme and pine honey from hives in the forest.', tel: '22940 62 1xx', d: '12345', h: '09:00-17:00' },
   { id: 'b3', cat: 'bakery', el: 'Οπωροπωλείο «Η Γη του Μαραθώνα»', en: '\u201cMarathon Earth\u201d Greengrocer', dEl: 'Λαχανικά του κάμπου, πατάτα Μαραθώνα, τυριά Αττικής.', dEn: 'Produce from the plain, Marathon potatoes, Attic cheeses.', tel: '22940 63 4xx', d: '123456', h: '08:00-20:00' },
-  { id: 'b4', cat: 'taverna', feat: true, el: 'Ταβέρνα «Ο Τύμβος»', en: 'Taverna O Tymvos', dEl: 'Μαγειρευτά και ψητά κάτω από τον πλάτανο, όλο τον χρόνο.', dEn: 'Home cooking and grills under the plane tree, year round.', tel: '22940 55 3xx', d: '0123456', h: '12:00-23:30' },
+  { id: 'b4', cat: 'taverna', el: 'Ταβέρνα «Ο Τύμβος»', en: 'Taverna O Tymvos', dEl: 'Μαγειρευτά και ψητά κάτω από τον πλάτανο, όλο τον χρόνο.', dEn: 'Home cooking and grills under the plane tree, year round.', tel: '22940 55 3xx', d: '0123456', h: '12:00-23:30' },
   { id: 'b5', cat: 'taverna', el: 'Ψαροταβέρνα «Κύμα»', en: 'Kyma Fish Taverna', dEl: 'Φρέσκο ψάρι στην παραλία Σχινιά, με τραπέζια στην άμμο.', dEn: 'Fresh fish on Schinias beach, tables on the sand.', tel: '22940 55 9xx', d: '034560', h: '12:00-00:00' },
   { id: 'b6', cat: 'taverna', el: 'Καφέ «Πλάτανος»', en: 'Cafe Platanos', dEl: 'Καφές, γλυκά του κουταλιού και εφημερίδες στην πλατεία.', dEn: 'Coffee, spoon sweets and newspapers on the square.', tel: '22940 56 2xx', d: '0123456', h: '07:00-22:00' },
   { id: 'b7', cat: 'taverna', el: 'Ουζερί Βρανά', en: 'Vrana Ouzeri', dEl: 'Μεζέδες και τσίπουρο, δέκα τραπέζια, χωρίς κατάλογο.', dEn: 'Mezedes and tsipouro, ten tables, no printed menu.', tel: '22940 57 8xx', d: '23456', h: '18:00-01:00' },
-  { id: 'b8', cat: 'stay', feat: true, el: 'Πευκιάς Rooms & Studios', en: 'Pefkias Rooms & Studios', dEl: 'Οκτώ στούντιο στο πευκοδάσος, 400 μ. από την παραλία.', dEn: 'Eight studios in the pines, 400 m from the beach.', tel: '22940 58 1xx', d: '0123456', h: '08:00-22:00' },
+  { id: 'b8', cat: 'stay', el: 'Πευκιάς Rooms & Studios', en: 'Pefkias Rooms & Studios', dEl: 'Οκτώ στούντιο στο πευκοδάσος, 400 μ. από την παραλία.', dEn: 'Eight studios in the pines, 400 m from the beach.', tel: '22940 58 1xx', d: '0123456', h: '08:00-22:00' },
   { id: 'b9', cat: 'stay', el: 'Ξενώνας Βρανά', en: 'Vrana Guesthouse', dEl: 'Πέντε δωμάτια σε πέτρινο κτίσμα, πρωινό με τοπικά προϊόντα.', dEn: 'Five rooms in a stone building, breakfast from local producers.', tel: '22940 58 7xx', d: '0123456', h: '09:00-21:00' },
   { id: 'b10', cat: 'health', el: 'Φαρμακείο Παπαδάκη', en: 'Papadaki Pharmacy', dEl: 'Συνταγογράφηση, εμβόλια ταξιδιού, είδη παραλίας.', dEn: 'Prescriptions, travel vaccines, beach essentials.', tel: '22940 51 2xx', d: '123456', h: '08:00-14:00' },
   { id: 'b11', cat: 'health', el: 'Οδοντιατρείο Λ. Στεφανίδη', en: 'L. Stefanidis Dental Surgery', dEl: 'Γενική οδοντιατρική, επείγοντα ραντεβού την ίδια μέρα.', dEn: 'General dentistry, same-day emergency appointments.', tel: '22940 52 6xx', d: '12345', h: '09:00-19:00' },
   { id: 'b12', cat: 'health', el: 'Φυσιοθεραπεία Μαραθώνος', en: 'Marathon Physiotherapy', dEl: 'Αποκατάσταση και αθλητικές κακώσεις — δρομείς καλοδεχούμενοι.', dEn: 'Rehab and sports injuries — runners welcome.', tel: '22940 53 3xx', d: '12345', h: '08:00-20:00' },
-  { id: 'b13', cat: 'home', feat: true, el: 'Φυτώριο «Ελαιώνας»', en: '\u201cEleonas\u201d Plant Nursery', dEl: 'Ελιές, εσπεριδοειδή και φυτά αντοχής στη ξηρασία, χονδρική & λιανική.', dEn: 'Olives, citrus and drought-hardy planting, trade & retail.', tel: '22940 64 5xx', d: '123456', h: '08:00-18:00' },
+  { id: 'b13', cat: 'home', el: 'Φυτώριο «Ελαιώνας»', en: '\u201cEleonas\u201d Plant Nursery', dEl: 'Ελιές, εσπεριδοειδή και φυτά αντοχής στη ξηρασία, χονδρική & λιανική.', dEn: 'Olives, citrus and drought-hardy planting, trade & retail.', tel: '22940 64 5xx', d: '123456', h: '08:00-18:00' },
   { id: 'b14', cat: 'home', el: 'Υδραυλικά Κ. Ρήγας', en: 'K. Rigas Plumbing', dEl: 'Υδραυλικές εγκαταστάσεις, θερμοσίφωνες, βλάβες αυθημερόν.', dEn: 'Installations, water heaters, same-day callouts.', tel: '22940 65 1xx', d: '123456', h: '07:30-17:00' },
   { id: 'b15', cat: 'home', el: 'Χρώματα & Σιδηρικά Μαραθώνος', en: 'Marathon Paint & Hardware', dEl: 'Χρώματα, εργαλεία, μικροϋλικά και κλειδιά.', dEn: 'Paint, tools, fixings and key cutting.', tel: '22940 66 8xx', d: '123456', h: '07:30-15:00' },
   { id: 'b16', cat: 'cloth', el: 'Boutique «Θάλασσα»', en: 'Thalassa Boutique', dEl: 'Λινά, μαγιό και ψάθες — γυναικεία και παιδικά.', dEn: 'Linen, swimwear and straw hats — women\u2019s and children\u2019s.', tel: '22940 67 2xx', d: '123456', h: '10:00-14:00' },
   { id: 'b17', cat: 'cloth', el: 'Υποδήματα Λεμονιά', en: 'Lemonia Shoes', dEl: 'Παπούτσια εργασίας, σανδάλια, επιδιορθώσεις.', dEn: 'Workwear shoes, sandals, repairs.', tel: '22940 68 4xx', d: '12345', h: '09:30-14:00' },
-  { id: 'b18', cat: 'pro', feat: true, el: 'Λογιστικό Γραφείο Ν. Βασιλείου', en: 'N. Vasileiou Accountants', dEl: 'Φορολογικά, μισθοδοσία και σύσταση επιχειρήσεων.', dEn: 'Tax, payroll and company formation.', tel: '22940 71 3xx', d: '12345', h: '09:00-17:00' },
+  { id: 'b18', cat: 'pro', el: 'Λογιστικό Γραφείο Ν. Βασιλείου', en: 'N. Vasileiou Accountants', dEl: 'Φορολογικά, μισθοδοσία και σύσταση επιχειρήσεων.', dEn: 'Tax, payroll and company formation.', tel: '22940 71 3xx', d: '12345', h: '09:00-17:00' },
   { id: 'b19', cat: 'pro', el: 'Ασφάλειες Μαραθώνος', en: 'Marathon Insurance', dEl: 'Αυτοκίνητο, κατοικία, επιχείρηση — ανεξάρτητος πράκτορας.', dEn: 'Motor, home and business — independent broker.', tel: '22940 72 9xx', d: '12345', h: '09:00-16:30' },
   { id: 'b20', cat: 'pro', el: 'Δικηγορικό Γραφείο Α. Κοντού', en: 'A. Kontou Law Office', dEl: 'Κτηματολόγιο, συμβόλαια, κληρονομικά.', dEn: 'Land registry, contracts, inheritance.', tel: '22940 73 1xx', d: '12345', h: '09:00-18:00' },
   { id: 'b21', cat: 'auto', el: 'Συνεργείο Αυτοκινήτων Ζαχαρίας', en: 'Zacharias Auto Repair', dEl: 'Service, διάγνωση, ΚΤΕΟ προετοιμασία.', dEn: 'Servicing, diagnostics, roadworthiness prep.', tel: '22940 74 6xx', d: '123456', h: '08:00-17:00' },
   { id: 'b22', cat: 'auto', el: 'Πρατήριο Καυσίμων Σχινιά', en: 'Schinias Fuel Station', dEl: 'Αμόλυβδη, diesel, πλυντήριο και αέρας — 24 ώρες.', dEn: 'Unleaded, diesel, car wash and air — 24 hours.', tel: '22940 75 2xx', d: '0123456', h: '00:00-23:59' },
   { id: 'b23', cat: 'auto', el: 'Ελαστικά Μαραθώνος', en: 'Marathon Tyres', dEl: 'Ελαστικά, ζυγοστάθμιση, ευθυγράμμιση.', dEn: 'Tyres, balancing, wheel alignment.', tel: '22940 76 5xx', d: '123456', h: '08:30-18:00' },
-  { id: 'b24', cat: 'beach', feat: true, el: 'Θαλάσσια Σπορ Σχινιά', en: 'Schinias Watersports', dEl: 'Windsurf, kite και SUP — σχολή, ενοικίαση, φύλαξη εξοπλισμού.', dEn: 'Windsurf, kite and SUP — school, rental, board storage.', tel: '22940 77 1xx', d: '0123456', h: '09:00-19:00' },
+  { id: 'b24', cat: 'beach', el: 'Θαλάσσια Σπορ Σχινιά', en: 'Schinias Watersports', dEl: 'Windsurf, kite και SUP — σχολή, ενοικίαση, φύλαξη εξοπλισμού.', dEn: 'Windsurf, kite and SUP — school, rental, board storage.', tel: '22940 77 1xx', d: '0123456', h: '09:00-19:00' },
   { id: 'b25', cat: 'beach', el: 'Ποδηλατάδικο Μαραθώνος', en: 'Marathon Cycles', dEl: 'Ενοικίαση ποδηλάτων, service και διαδρομές στον κάμπο.', dEn: 'Bike rental, service and routes across the plain.', tel: '22940 78 3xx', d: '123456', h: '09:00-18:00' }
 ];
 
@@ -111,4 +116,21 @@ export const MEMBER_DETAILS: Record<string, MemberDetail> = {
 
 export function getMember(id: string): Member | undefined {
   return MEMBERS.find((m) => m.id === id);
+}
+
+export function memberSlug(m: Member): string {
+  return m.slug ?? slugify(m.el);
+}
+
+const BY_SLUG = new Map<string, Member>();
+for (const m of MEMBERS) {
+  const slug = memberSlug(m);
+  // Two members with the same address would hide one of them — fail the build instead.
+  const taken = BY_SLUG.get(slug);
+  if (taken) throw new Error(`Members ${taken.id} and ${m.id} share the URL slug "${slug}". Give one a \`slug\`.`);
+  BY_SLUG.set(slug, m);
+}
+
+export function getMemberBySlug(slug: string): Member | undefined {
+  return BY_SLUG.get(slug);
 }

@@ -128,8 +128,7 @@ function DirectoryView({
                     m={m}
                     lang={lang}
                     common={common}
-                    featuredLabel={t.featured}
-                    variant={m.feat ? "featured" : "standard"}
+                    variant="standard"
                   />
                 ))}
               </div>

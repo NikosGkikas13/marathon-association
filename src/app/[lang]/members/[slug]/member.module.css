@@ -64,17 +64,7 @@
 .mapCta { color: var(--color-accent-700); font-family: var(--font-heading); font-weight: 600; }
 .directions { display: inline-block; margin-top: 9px; font-size: 13.5px; text-decoration: none; }
 
-.badge {
-  display: inline-block;
-  font-size: 9.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-accent-700);
-  border: 1px solid var(--color-accent-300);
-  padding: 4px 8px;
-  border-radius: var(--radius-md);
-}
-.note { margin: 12px 0 0; }
+.note { margin: 0; }
 
 .related { padding-top: 62px; }
 .relatedHead { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
