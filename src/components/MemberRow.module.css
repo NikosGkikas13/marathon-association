@@ -1,0 +1,24 @@
+.row {
+  display: flex;
+  gap: 16px;
+  padding: 18px 2px;
+  border-top: 1px solid var(--color-divider);
+}
+.thumb { width: 88px; height: 88px; flex: none; overflow: hidden; border-radius: var(--radius-md); }
+.thumbInner { width: 100%; height: 100%; }
+.body { min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.kicker { font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; opacity: 0.55; }
+.name { margin: 0; font-size: 17px; line-height: 1.16; letter-spacing: 0; }
+.desc { font-size: 13px; line-height: 1.5; opacity: 0.75; }
+.meta { display: flex; align-items: center; gap: 10px; font-size: 12px; margin-top: 2px; }
+.tel { color: inherit; opacity: 0.45; text-decoration: none; font-variant-numeric: tabular-nums; }
+.tel:hover { opacity: 0.8; color: inherit; }
+
+@media (max-width: 720px) {
+  .row { gap: 13px; padding: 14px 0; }
+  .thumb { width: 64px; height: 64px; }
+  .body { gap: 3px; }
+  .kicker { font-size: 9.5px; }
+  .name { font-size: 15.5px; line-height: 1.18; }
+  .desc, .tel, .row :global(.hover-rule) { display: none; }
+}

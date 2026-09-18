@@ -1,0 +1,33 @@
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+}
+
+.img { object-fit: cover; }
+
+/* Photo still to come: a quiet paper tile, a faint ring and the caption. */
+.empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  text-align: center;
+}
+.empty::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px dashed color-mix(in srgb, var(--color-text) 18%, transparent);
+  pointer-events: none;
+}
+.caption {
+  max-width: 28ch;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+}

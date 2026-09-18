@@ -1,0 +1,72 @@
+.kicker { font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; opacity: 0.55; }
+.name { margin: 0; font-size: 17px; line-height: 1.16; letter-spacing: 0; }
+.desc { margin: 1px 0 0; font-size: 13px; line-height: 1.48; opacity: 0.8; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 3px; font-size: 12px; }
+.state { font-family: var(--font-heading); font-weight: 600; }
+.hours { opacity: 0.55; }
+.tel {
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 3px 0;
+  font-size: 13.5px;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+/* — featured — */
+.featured {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.featuredMedia { overflow: hidden; }
+.featuredPhoto { aspect-ratio: 16 / 9; }
+.featuredBody { display: flex; flex-direction: column; gap: 7px; padding: 16px 17px 17px; }
+.featuredTop { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.badge {
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-700);
+  border: 1px solid var(--color-accent-300);
+  padding: 3px 7px;
+  border-radius: var(--radius-md);
+}
+.featured .name { font-size: 20px; }
+.featured .desc { margin-top: 2px; font-size: 13.5px; line-height: 1.5; }
+.featured .meta { gap: 8px 14px; margin-top: 6px; font-size: 12.5px; }
+.featured .tel { margin-top: 4px; padding: 4px 0; font-size: 14px; }
+
+/* — standard / compact — */
+.standard {
+  display: flex;
+  gap: 15px;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: 14px 15px;
+}
+.thumb { width: 84px; height: 84px; flex: none; overflow: hidden; border-radius: var(--radius-md); }
+.thumbInner { width: 100%; height: 100%; }
+.standardBody { min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+
+.compact { gap: 14px; }
+.compact .thumb { width: 72px; height: 72px; }
+.compact .standardBody { gap: 4px; }
+.compact .name { font-size: 16px; }
+.compact .desc { font-size: 12.5px; line-height: 1.45; opacity: 0.78; }
+.compact .state { font-family: inherit; font-weight: 400; font-size: 12px; }
+
+@media (max-width: 720px) {
+  .standard { gap: 12px; padding: 12px 13px; }
+  .thumb, .compact .thumb { width: 68px; height: 68px; }
+  .standardBody { gap: 3px; }
+  .kicker { font-size: 9.5px; }
+  .name { font-size: 15.5px; line-height: 1.18; }
+  .featured .name { font-size: 17.5px; }
+  .desc { font-size: 12.5px; line-height: 1.45; }
+  .standard :global(.hover-rule), .featured :global(.hover-rule) { display: none; }
+  .tel { min-height: 40px; display: inline-flex; align-items: center; }
+}

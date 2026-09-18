@@ -1,0 +1,11 @@
+.intro { display: grid; gap: 44px; align-items: end; }
+.title { margin: 0; font-size: clamp(40px, 6.4vw, 92px); line-height: 0.94; letter-spacing: -0.022em; }
+.aside { padding-bottom: 8px; }
+
+@media (max-width: 900px) {
+  .intro { grid-template-columns: 1fr !important; gap: 14px; }
+  .aside { padding-bottom: 0; }
+}
+@media (max-width: 720px) {
+  .title { font-size: 38px; line-height: 0.98; letter-spacing: -0.02em; }
+}

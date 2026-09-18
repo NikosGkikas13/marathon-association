@@ -1,0 +1,250 @@
+/* Broadsheet — design-system tokens and component classes, carried over from
+   the design's _ds/broadsheet styles.css. The font comes from next/font
+   (--font-source-serif) instead of the Google Fonts @import, and the
+   print-plate (.cmyk) treatments are left out because no page uses them. */
+
+:root {
+  --color-bg: #f3f2f2;
+  --color-surface: #eae9e9;
+  --color-text: #201e1d;
+  --color-accent: #0088b0;
+  --color-accent-2: #d6006c;
+  --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
+
+  /* Tonal ramps — generated in OKLCH on one shared lightness scale. */
+  --color-neutral-100: #f8f4f4;
+  --color-neutral-200: #eae7e7;
+  --color-neutral-300: #d7d3d3;
+  --color-neutral-400: #bab6b6;
+  --color-neutral-500: #9b9797;
+  --color-neutral-600: #7d7979;
+  --color-neutral-700: #605d5d;
+  --color-neutral-800: #444141;
+  --color-neutral-900: #2d2b2b;
+
+  --color-accent-100: #e9f8ff;
+  --color-accent-200: #cbeeff;
+  --color-accent-300: #99e0ff;
+  --color-accent-400: #62c5ee;
+  --color-accent-500: #38a6cf;
+  --color-accent-600: #1186ac;
+  --color-accent-700: #006786;
+  --color-accent-800: #004961;
+  --color-accent-900: #0a303e;
+
+  --color-accent-2-100: #fff1f4;
+  --color-accent-2-200: #ffdee6;
+  --color-accent-2-300: #ffc0d0;
+  --color-accent-2-400: #ff90b1;
+  --color-accent-2-500: #ff458e;
+  --color-accent-2-600: #d82071;
+  --color-accent-2-700: #aa0b56;
+  --color-accent-2-800: #790e3d;
+  --color-accent-2-900: #4b1528;
+
+  --font-heading: var(--font-source-serif), Georgia, serif;
+  --font-heading-weight: 600;
+  --font-body: var(--font-source-serif), Georgia, serif;
+
+  --space-1: 5px;
+  --space-2: 10px;
+  --space-3: 15px;
+  --space-4: 20px;
+  --space-6: 30px;
+  --space-8: 40px;
+
+  --radius-sm: 1px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #2d2b2b 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #2d2b2b 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #2d2b2b 22%, transparent);
+
+  /* Site layout — from the Marathon page. */
+  --paper-light: #f7f5f3; /* light ink over photographs */
+  --ease: cubic-bezier(0.16, 0.84, 0.44, 1);
+  --page-max: 1440px;
+  --gutter: 40px;
+  --header-h: 92px; /* over the home hero */
+  --header-solid-h: 80px; /* everywhere else */
+}
+
+@media (max-width: 720px) {
+  :root {
+    --gutter: 18px;
+    --header-h: 64px;
+    --header-solid-h: 64px;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-2);
+}
+h1 { font-size: 42px; }
+h2 { font-size: 32px; }
+h3 { font-size: 25px; }
+h4 { font-size: 20px; }
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-accent); text-underline-offset: 3px; }
+a:hover { color: var(--color-accent-700); }
+img { display: block; max-width: 100%; }
+figure { margin: 0; }
+figcaption {
+  font-size: 11px;
+  margin-top: var(--space-1);
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+/* — buttons — */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; color: var(--color-text);
+  background: transparent; border: 1px solid transparent;
+  padding: var(--space-2) calc(var(--space-3) * 1.2);
+  border-radius: var(--radius-md);
+}
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { background: var(--color-accent); color: var(--color-bg); }
+.btn-primary:hover { background: var(--color-accent-600); color: var(--color-bg); }
+.btn-primary:active { background: var(--color-accent-700); }
+.btn-secondary { border-color: var(--color-divider); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); color: var(--color-text); }
+.btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
+.btn-block { width: 100%; margin-top: var(--space-2); }
+
+/* — forms — */
+.input {
+  width: 100%; min-height: 36px; padding: 6px 10px; font: inherit;
+  font-size: 14px; color: var(--color-text); caret-color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.input::placeholder { color: color-mix(in srgb, var(--color-text) 65%, transparent); opacity: 1; }
+.input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+
+/* — tags — */
+.tag {
+  display: inline-flex; align-items: center; font-size: 11px;
+  letter-spacing: 0.02em; padding: 3px 10px;
+  border-radius: calc(var(--radius-md) * 0.75);
+}
+.tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent); }
+
+/* — tables — */
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table td {
+  padding: var(--space-2);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+}
+.table tbody tr:hover { background: color-mix(in srgb, var(--color-text) 4%, transparent); }
+
+/* — halftone dot screen for interface imagery — */
+.halftone { position: relative; filter: grayscale(0.35) contrast(1.15); overflow: hidden; }
+.halftone::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.22) 30%, transparent 32%);
+  background-size: 3px 3px; mix-blend-mode: multiply;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Site utilities shared across pages
+   ══════════════════════════════════════════════════════════════════════ */
+
+.page { max-width: var(--page-max); margin: 0 auto; padding-inline: var(--gutter); }
+.page.narrow { max-width: 1280px; }
+
+/* Small uppercase label above a heading. */
+.eyebrow {
+  margin: 0 0 10px; font-size: 10.5px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--color-accent-700);
+}
+.label {
+  display: block; font-size: 10.5px; letter-spacing: 0.14em;
+  text-transform: uppercase; opacity: 0.55;
+}
+.placeholder-note { font-size: 12px; line-height: 1.5; color: var(--color-accent-2-700); }
+
+/* Heading-weight link with a rule under it ("All places", "Join…"). */
+.rule-link {
+  font-family: var(--font-heading); font-weight: 600; font-size: 14px;
+  text-decoration: none; padding-bottom: 2px; border-bottom: 1.5px solid currentColor;
+  align-self: flex-start;
+}
+
+/* Hover choreography — the card lifts, its photo eases in and the rule
+   under its title draws out from the left. `.hover-flat` keeps it flat. */
+.hover-card { transition: box-shadow 0.22s var(--ease); }
+.hover-zoom { transition: transform 0.24s var(--ease); }
+.hover-rule {
+  display: block; height: 1.5px; background: var(--color-text);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.22s var(--ease);
+}
+.hover-card:focus-within .hover-rule { transform: scaleX(1); }
+/* Only on a real pointer — on touch a tapped card would stay "hovered". */
+@media (hover: hover) {
+  .hover-card:hover { box-shadow: var(--shadow-md); }
+  .hover-card.hover-flat:hover { box-shadow: none; }
+  .hover-card:hover .hover-zoom { transform: scale(1.04); }
+  .hover-card:hover .hover-rule { transform: scaleX(1); }
+}
+
+/* Horizontal strips of chips scroll without showing a scrollbar. */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Whole-card links: the title's link stretches over the card, and links
+   inside the card (tel:, maps) sit above it. */
+.stretch { position: relative; }
+.stretch-link { color: inherit; text-decoration: none; }
+.stretch-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.stretch-link:hover { color: inherit; }
+.stretch .above { position: relative; z-index: 2; }
+
+/* The meander (Greek key) strip — the page's one ornament, used as a
+   section mark. Drawn in currentColor through a mask. */
+.meander {
+  display: block; height: 9px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='9'%3E%3Cpath d='M0 7.5H7V1.5H19V7.5H26' fill='none' stroke='black' stroke-width='1.4'/%3E%3C/svg%3E") repeat-x left center;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='9'%3E%3Cpath d='M0 7.5H7V1.5H19V7.5H26' fill='none' stroke='black' stroke-width='1.4'/%3E%3C/svg%3E") repeat-x left center;
+}
+.meander-muted { color: var(--color-text); opacity: 0.3; }
+
+/* Scroll reveal: content below the fold rises in as it arrives. Set by
+   <Reveals/> only when JS runs, so the static HTML is always visible. */
+[data-reveal].is-pending { opacity: 0; transform: translateY(18px); }
+[data-reveal].is-shown {
+  opacity: 1; transform: none;
+  transition: opacity 0.5s var(--ease), transform 0.6s var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-card:hover .hover-zoom { transform: none; }
+  [data-reveal].is-pending { transform: none; }
+}

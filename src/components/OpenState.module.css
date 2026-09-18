@@ -1,0 +1,2 @@
+.state { color: color-mix(in srgb, var(--color-text) 50%, transparent); }
+.state[data-open] { color: var(--color-accent-700); }

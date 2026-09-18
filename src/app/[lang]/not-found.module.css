@@ -1,0 +1,3 @@
+.wrap { padding-top: 80px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 10px; }
+.title { margin: 0; font-size: clamp(40px, 6.4vw, 92px); line-height: 0.94; letter-spacing: -0.022em; }
+.alt { font-size: 17px; font-style: italic; opacity: 0.6; margin-bottom: 18px; }
