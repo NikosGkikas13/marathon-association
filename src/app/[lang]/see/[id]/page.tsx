@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Photo } from "@/components/Photo";
+import { ZoomPhoto } from "@/components/ZoomPhoto";
 import { LANDMARKS, getLandmark } from "@/content/landmarks";
 import { LANDMARK_ARTICLES } from "@/content/landmark-articles";
 import { getDictionary } from "@/lib/dictionary";
@@ -37,7 +37,7 @@ export default async function PlacePage({ params }: PageProps<"/[lang]/see/[id]"
   const paragraphs = article[lang];
   const next = LANDMARKS[(LANDMARKS.indexOf(lm) + 1) % LANDMARKS.length];
   const km = formatKm(lm.km, lang, dict.common);
-  const gallery = [0, 1, 2].map((i) => lm.gallery?.[i]);
+  const gallery = lm.gallery ?? [undefined, undefined, undefined];
 
   return (
     <main>
@@ -64,7 +64,7 @@ export default async function PlacePage({ params }: PageProps<"/[lang]/see/[id]"
       </section>
 
       <figure className={styles.hero}>
-        <Photo src={lm.img} alt={t.name} pending={lm.ph} sizes="100vw" priority />
+        <ZoomPhoto src={lm.img} alt={t.name} pending={lm.ph} sizes="100vw" priority closeLabel={dict.nav.close} />
       </figure>
 
       <section className={`page ${styles.bodyGrid}`}>
@@ -90,10 +90,22 @@ export default async function PlacePage({ params }: PageProps<"/[lang]/see/[id]"
           <dl className={styles.facts}>
             <div><dt>{dict.common.fromCentre}</dt><dd>{km}</dd></div>
             <div><dt>{p.category}</dt><dd>{t.category}</dd></div>
-            <div><dt>{p.hours}</dt><dd className={styles.tbc}>{p.tbc}</dd></div>
-            <div><dt>{p.admission}</dt><dd className={styles.tbc}>{p.tbc}</dd></div>
+            {lm.visit ? (
+              <>
+                <div><dt>{p.address}</dt><dd>{lm.visit.addr}</dd></div>
+                <div><dt>{p.phone}</dt><dd><a href={`tel:${lm.visit.phone.replace(/\s/g, "")}`}>{lm.visit.phone}</a></dd></div>
+                <div><dt>{p.hours}</dt><dd>{lang === "el" ? lm.visit.hoursEl : lm.visit.hoursEn}</dd></div>
+              </>
+            ) : (
+              <div><dt>{p.hours}</dt><dd className={styles.tbc}>{p.tbc}</dd></div>
+            )}
+            {lm.visit?.admEl ? (
+              <div><dt>{p.admission}</dt><dd>{lang === "el" ? lm.visit.admEl : lm.visit.admEn}</dd></div>
+            ) : (
+              <div><dt>{p.admission}</dt><dd className={styles.tbc}>{p.tbc}</dd></div>
+            )}
           </dl>
-          <p className="placeholder-note">{p.placeholderNote}</p>
+          {lm.visit ? null : <p className="placeholder-note">{p.placeholderNote}</p>}
         </aside>
       </section>
 
@@ -102,7 +114,8 @@ export default async function PlacePage({ params }: PageProps<"/[lang]/see/[id]"
         <div className={styles.gallery}>
           {gallery.map((src, i) => (
             <div key={i} className={styles.galleryItem}>
-              <Photo
+              <ZoomPhoto
+                closeLabel={dict.nav.close}
                 src={src}
                 alt={`${t.name} — ${dict.common.photograph} ${i + 2}`}
                 pending={`${dict.common.photograph} ${i + 2}`}

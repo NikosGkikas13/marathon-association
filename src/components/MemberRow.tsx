@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { memberSlug, type Member } from "@/content/members";
+import { memberPhoto, memberSlug, type Member } from "@/content/members";
 import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/dictionary";
 import { telHref } from "@/lib/format";
@@ -15,7 +15,7 @@ export function MemberRow({ m, lang, dict }: { m: Member; lang: Locale; dict: Di
     <article className={`${styles.row} hover-card stretch`} data-reveal>
       <div className={styles.thumb}>
         <div className={`${styles.thumbInner} hover-zoom`}>
-          <Photo alt={t.name} sizes="88px" />
+          <Photo src={memberPhoto(m)} alt={t.name} sizes="88px" />
         </div>
       </div>
       <div className={styles.body}>

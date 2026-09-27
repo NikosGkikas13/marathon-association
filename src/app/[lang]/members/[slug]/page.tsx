@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MemberCard } from "@/components/MemberCard";
 import { OpenState } from "@/components/OpenState";
-import { Photo } from "@/components/Photo";
+import { ZoomPhoto } from "@/components/ZoomPhoto";
 import { WeekHours } from "@/components/WeekHours";
 import { MEMBERS, MEMBER_CATS, MEMBER_DETAILS, getMemberBySlug, memberSlug } from "@/content/members";
 import { getDictionary } from "@/lib/dictionary";
@@ -36,6 +36,7 @@ export default async function MemberPage({ params }: PageProps<"/[lang]/members/
   const d = dict.member;
   const t = memberText(m, lang);
   const more = MEMBER_DETAILS[m.id];
+  const photos = more?.photos ?? [];
   const services = more ? (lang === "el" ? more.svcEl : more.svcEn) : [];
   const mapsHref = more?.ll
     ? mapsSearchHref(more.ll)
@@ -63,7 +64,7 @@ export default async function MemberPage({ params }: PageProps<"/[lang]/members/
       </section>
 
       <figure className={styles.hero}>
-        <Photo alt={t.name} pending={t.name} sizes="100vw" />
+        <ZoomPhoto src={photos[0]} alt={t.name} pending={t.name} sizes="100vw" priority closeLabel={dict.nav.close} />
       </figure>
 
       <section className={`page narrow ${styles.bodyGrid}`}>
@@ -79,7 +80,13 @@ export default async function MemberPage({ params }: PageProps<"/[lang]/members/
           <div className={styles.gallery}>
             {[2, 3, 4].map((n) => (
               <div key={n} className={styles.galleryItem}>
-                <Photo alt={`${t.name} — ${dict.common.photograph} ${n}`} pending={`${dict.common.photograph} ${n}`} sizes="(max-width: 720px) 100vw, 25vw" />
+                <ZoomPhoto
+                  closeLabel={dict.nav.close}
+                  src={photos[n - 1]}
+                  alt={`${t.name} — ${dict.common.photograph} ${n}`}
+                  pending={`${dict.common.photograph} ${n}`}
+                  sizes="(max-width: 720px) 100vw, 25vw"
+                />
               </div>
             ))}
           </div>

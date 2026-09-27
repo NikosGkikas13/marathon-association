@@ -43,9 +43,18 @@ const el = {
     lede: "Πευκόδασος, θάλασσα, τύμβος. Μια μέρα από την Αθήνα — και είκοσι πέντε αιώνες πιο πίσω.",
     heroAlt: "Ο Τύμβος των Αθηναίων στην πεδιάδα του Μαραθώνα",
     entries: {
-      see: { title: "Τι να δείτε", body: "Δέκα σημεία — από τον Τύμβο ως τη λίμνη." },
-      members: { title: "Τοπικές επιχειρήσεις", body: "Τα μέλη του συλλόγου, ανά κατηγορία." },
-      info: { title: "Χρήσιμες πληροφορίες", body: "Πρόσβαση, παραλίες, τηλέφωνα ανάγκης." },
+      see: {
+        title: "Τι να δείτε",
+        body: "Δέκα σημεία — από τον Τύμβο ως τη λίμνη.",
+      },
+      members: {
+        title: "Τοπικές επιχειρήσεις",
+        body: "Τα μέλη του συλλόγου, ανά κατηγορία.",
+      },
+      info: {
+        title: "Χρήσιμες πληροφορίες",
+        body: "Πρόσβαση, παραλίες, τηλέφωνα ανάγκης.",
+      },
     },
     battle: {
       kicker: "Η μάχη",
@@ -78,6 +87,8 @@ const el = {
     visiting: "Η επίσκεψη",
     category: "Κατηγορία",
     hours: "Ώρες λειτουργίας",
+    address: "Διεύθυνση",
+    phone: "Τηλέφωνο",
     admission: "Εισιτήριο",
     tbc: "Προς επιβεβαίωση",
     placeholderNote: "Τα στοιχεία επίσκεψης είναι δείγμα.",
@@ -119,10 +130,15 @@ const el = {
       { num: "166", title: "ΕΚΑΒ", body: "Ασθενοφόρο" },
       { num: "199", title: "Πυροσβεστική", body: "Πυρκαγιά, διάσωση" },
       { num: "108", title: "Λιμενικό Σώμα", body: "Περιστατικά στη θάλασσα" },
-      { num: "1571", title: "Τουριστική Αστυνομία", body: "Πληροφορίες, παράπονα" },
+      {
+        num: "1571",
+        title: "Τουριστική Αστυνομία",
+        body: "Πληροφορίες, παράπονα",
+      },
     ],
     local: "Τοπικές υπηρεσίες",
-    localNote: "Τα στοιχεία είναι δείγμα — προς επιβεβαίωση πριν τη δημοσίευση.",
+    localNote:
+      "Τα στοιχεία είναι δείγμα — προς επιβεβαίωση πριν τη δημοσίευση.",
     localRows: [
       { name: "Κέντρο Υγείας Μαραθώνα", tel: "22940 00 000" },
       { name: "Αστυνομικό Τμήμα Μαραθώνα", tel: "22940 00 000" },
@@ -133,12 +149,22 @@ const el = {
     ],
     access: "Πρόσβαση",
     accessItems: [
-      { label: "Λεωφορείο:", text: "ΚΤΕΛ Αττικής από την οδό Μαυρομματαίων, Αθήνα. Διαδρομή περίπου 1 ώρα 15 λεπτά, ανά ώρα τις καθημερινές." },
-      { label: "Αυτοκίνητο:", text: "42 χλμ. από το κέντρο της Αθήνας μέσω Λεωφόρου Μαραθώνος, περίπου 50 λεπτά χωρίς κίνηση." },
-      { label: "Στάθμευση:", text: "ελεύθερη στον Τύμβο, στο μουσείο Βρανά και στην είσοδο του Σχινιά. Μην σταθμεύετε στους δασικούς δρόμους — είναι οδοί διαφυγής." },
+      {
+        label: "Λεωφορείο:",
+        text: "ΚΤΕΛ Αττικής από την οδό Μαυρομματαίων, Αθήνα. Διαδρομή περίπου 1 ώρα 15 λεπτά, ανά ώρα τις καθημερινές.",
+      },
+      {
+        label: "Αυτοκίνητο:",
+        text: "42 χλμ. από το κέντρο της Αθήνας μέσω Λεωφόρου Μαραθώνος, περίπου 50 λεπτά χωρίς κίνηση.",
+      },
+      {
+        label: "Στάθμευση:",
+        text: "ελεύθερη στον Τύμβο, στο μουσείο Βρανά και στην είσοδο του Σχινιά. Μην σταθμεύετε στους δασικούς δρόμους — είναι οδοί διαφυγής.",
+      },
     ],
     beach: "Ασφάλεια στην παραλία",
-    beachBody: "Ναυαγοσώστης μόνο στις οργανωμένες θέσεις του Σχινιά, Ιούλιο και Αύγουστο. Το απόγευμα σηκώνεται βόρειος άνεμος — προσοχή με στρώματα και SUP. Κόκκινη σημαία σημαίνει απαγόρευση εισόδου στο νερό.",
+    beachBody:
+      "Ναυαγοσώστης μόνο στις οργανωμένες θέσεις του Σχινιά, Ιούλιο και Αύγουστο. Το απόγευμα σηκώνεται βόρειος άνεμος — προσοχή με στρώματα και SUP. Κόκκινη σημαία σημαίνει απαγόρευση εισόδου στο νερό.",
     fire: "Κίνδυνος πυρκαγιάς — θέρος",
     fireBody: [
       "Από 1 Μαΐου έως 31 Οκτωβρίου απαγορεύεται κάθε φωτιά, ψησταριά και κάπνισμα στο πευκοδάσος. Καλέστε ",
@@ -154,7 +180,8 @@ const el = {
     placeholder: "Δείγμα στοιχείων",
     pages: "Σελίδες",
     association: "Ο σύλλογος",
-    associationBody: "Εθελοντικό σωματείο τοπικών επιχειρήσεων. Ο κατάλογος μελών είναι συνδρομητικός.",
+    associationBody:
+      "Εθελοντικό σωματείο τοπικών επιχειρήσεων. Ο κατάλογος μελών είναι συνδρομητικός.",
     emergency: "Ανάγκη",
     emergencyNumbers: [
       { num: "112", label: "γενικό" },
@@ -209,9 +236,18 @@ const en: Dictionary = {
     lede: "Pine forest, open sea, a burial mound. An hour from Athens — and twenty-five centuries back.",
     heroAlt: "The Tomb of the Athenians on the Marathon plain",
     entries: {
-      see: { title: "What to see", body: "Ten places — from the Tomb to the lake." },
-      members: { title: "Local businesses", body: "Association members, by category." },
-      info: { title: "Practical info", body: "Access, beaches, emergency numbers." },
+      see: {
+        title: "What to see",
+        body: "Ten places — from the Tomb to the lake.",
+      },
+      members: {
+        title: "Local businesses",
+        body: "Association members, by category.",
+      },
+      info: {
+        title: "Practical info",
+        body: "Access, beaches, emergency numbers.",
+      },
     },
     battle: {
       kicker: "The battle",
@@ -244,6 +280,8 @@ const en: Dictionary = {
     visiting: "Visiting",
     category: "Category",
     hours: "Opening hours",
+    address: "Address",
+    phone: "Phone",
     admission: "Admission",
     tbc: "To be confirmed",
     placeholderNote: "Visiting details are placeholder values.",
@@ -285,7 +323,11 @@ const en: Dictionary = {
       { num: "166", title: "Ambulance", body: "National ambulance service" },
       { num: "199", title: "Fire service", body: "Fire and rescue" },
       { num: "108", title: "Coast guard", body: "Incidents at sea" },
-      { num: "1571", title: "Tourist police", body: "Information and complaints" },
+      {
+        num: "1571",
+        title: "Tourist police",
+        body: "Information and complaints",
+      },
     ],
     local: "Local services",
     localNote: "Placeholder values — to be confirmed before publication.",
@@ -299,12 +341,22 @@ const en: Dictionary = {
     ],
     access: "Getting here",
     accessItems: [
-      { label: "Bus:", text: "KTEL Attikis from Mavromateon Street, Athens. About 1 h 15 min, hourly on weekdays." },
-      { label: "Driving:", text: "42 km from central Athens via Marathonos Avenue, about 50 minutes without traffic." },
-      { label: "Parking:", text: "free at the Tymbos, the Vrana museum and the Schinias entrance. Do not park on the forest tracks — they are escape routes." },
+      {
+        label: "Bus:",
+        text: "KTEL Attikis from Mavromateon Street, Athens. About 1 h 15 min, hourly on weekdays.",
+      },
+      {
+        label: "Driving:",
+        text: "42 km from central Athens via Marathonos Avenue, about 50 minutes without traffic.",
+      },
+      {
+        label: "Parking:",
+        text: "free at the Tymbos, the Vrana museum and the Schinias entrance. Do not park on the forest tracks — they are escape routes.",
+      },
     ],
     beach: "Beach safety",
-    beachBody: "Lifeguards only at the organised sections of Schinias, in July and August. A north wind rises in the afternoon — take care with inflatables and SUP boards. A red flag means do not enter the water.",
+    beachBody:
+      "Lifeguards only at the organised sections of Schinias, in July and August. A north wind rises in the afternoon — take care with inflatables and SUP boards. A red flag means do not enter the water.",
     fire: "Fire risk — summer",
     fireBody: [
       "From 1 May to 31 October all fires, barbecues and smoking are banned in the pine forest. Call ",
@@ -320,7 +372,8 @@ const en: Dictionary = {
     placeholder: "Placeholder details",
     pages: "Pages",
     association: "The association",
-    associationBody: "A voluntary body of local businesses. The member directory is subscription based.",
+    associationBody:
+      "A voluntary body of local businesses. The member directory is subscription based.",
     emergency: "Emergency",
     emergencyNumbers: [
       { num: "112", label: "general" },

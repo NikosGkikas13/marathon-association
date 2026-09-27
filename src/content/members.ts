@@ -43,6 +43,8 @@ export type MemberDetail = {
   svcEl: string[];
   svcEn: string[];
   addr: string;
+  /** Photographs in /public/images: the first is the hero, the rest fill the gallery. */
+  photos?: string[];
 };
 
 export const MEMBER_CATS: MemberCategory[] = [
@@ -82,7 +84,11 @@ export const MEMBERS: Member[] = [
   { id: 'b22', cat: 'auto', el: 'Πρατήριο Καυσίμων Σχινιά', en: 'Schinias Fuel Station', dEl: 'Αμόλυβδη, diesel, πλυντήριο και αέρας — 24 ώρες.', dEn: 'Unleaded, diesel, car wash and air — 24 hours.', tel: '22940 75 2xx', d: '0123456', h: '00:00-23:59' },
   { id: 'b23', cat: 'auto', el: 'Ελαστικά Μαραθώνος', en: 'Marathon Tyres', dEl: 'Ελαστικά, ζυγοστάθμιση, ευθυγράμμιση.', dEn: 'Tyres, balancing, wheel alignment.', tel: '22940 76 5xx', d: '123456', h: '08:30-18:00' },
   { id: 'b24', cat: 'beach', el: 'Θαλάσσια Σπορ Σχινιά', en: 'Schinias Watersports', dEl: 'Windsurf, kite και SUP — σχολή, ενοικίαση, φύλαξη εξοπλισμού.', dEn: 'Windsurf, kite and SUP — school, rental, board storage.', tel: '22940 77 1xx', d: '0123456', h: '09:00-19:00' },
-  { id: 'b25', cat: 'beach', el: 'Ποδηλατάδικο Μαραθώνος', en: 'Marathon Cycles', dEl: 'Ενοικίαση ποδηλάτων, service και διαδρομές στον κάμπο.', dEn: 'Bike rental, service and routes across the plain.', tel: '22940 78 3xx', d: '123456', h: '09:00-18:00' }
+  { id: 'b25', cat: 'beach', el: 'Ποδηλατάδικο Μαραθώνος', en: 'Marathon Cycles', dEl: 'Ενοικίαση ποδηλάτων, service και διαδρομές στον κάμπο.', dEn: 'Bike rental, service and routes across the plain.', tel: '22940 78 3xx', d: '123456', h: '09:00-18:00' },
+  { id: 'b26', cat: 'bakery', el: 'Φούρνος Γκίκα', en: 'Gkikas Bakery', dEl: 'Χειροποίητες πίτες, ζυμωτό ψωμί και γλυκά από το 1994.', dEn: 'Handmade pies, kneaded bread and pastries since 1994.', tel: '22940 67557', d: '0123456', h: '06:00-20:30' },
+  // Hours are placeholders until the shop confirms them.
+  { id: 'b27', cat: 'bakery', el: 'Κρεοπωλείο «Η Εύβοια»', en: 'Evia Butcher Shop', dEl: 'Ελληνικά κρέατα, φρέσκα κάθε μέρα, από το 1981.', dEn: 'Greek meat, fresh every day, since 1981.', tel: '22940 66743', d: '123456', h: '08:00-15:00' },
+  { id: 'b28', cat: 'taverna', el: 'Quattro Staggioni', en: 'Quattro Staggioni', dEl: 'Πιτσαρία με πίτσα, μακαρονάδες, ριζότο, πεϊνιρλί, καλτσόνε και burger.', dEn: 'Pizzeria with pizza, pasta, risotto, peinirli, calzone and burgers.', tel: '22940 67150', d: '0123456', h: '13:00-00:00' }
 ];
 
 // Per-member detail copy. Addresses are placeholder street numbers.
@@ -111,8 +117,16 @@ export const MEMBER_DETAILS: Record<string, MemberDetail> = {
   b22: { ll: '38.1478,24.0038', el: 'Πρατήριο στον δρόμο προς τον Σχινιά, ανοιχτό όλο το εικοσιτετράωρο, με πλυντήριο και αέρα.', en: 'A filling station on the Schinias road, open around the clock, with car wash and air.', svcEl: ['Αμόλυβδη και diesel', 'Πλυντήριο', 'Αέρας και νερό'], svcEn: ['Unleaded and diesel', 'Car wash', 'Air and water'], addr: 'Λεωφ. Σχινιά 3' },
   b23: { ll: '38.1489,23.9724', el: 'Ελαστικά για επιβατικά και επαγγελματικά οχήματα, με ζυγοστάθμιση και ευθυγράμμιση.', en: 'Tyres for cars and light commercials, with balancing and wheel alignment.', svcEl: ['Ελαστικά όλων των τύπων', 'Ζυγοστάθμιση', 'Φύλαξη χειμερινών'], svcEn: ['Tyres of every type', 'Balancing', 'Winter tyre storage'], addr: 'Λεωφ. Μαραθώνος 103' },
   b24: { ll: '38.1425,24.0196', el: 'Σχολή και κέντρο ενοικίασης για windsurf, kite και SUP στον Σχινιά, όπου ο απογευματινός βοριάς είναι σταθερός.', en: 'A school and rental centre for windsurf, kite and SUP at Schinias, where the afternoon north wind is reliable.', svcEl: ['Μαθήματα για αρχάριους', 'Ενοικίαση εξοπλισμού', 'Φύλαξη σανίδων'], svcEn: ['Beginner lessons', 'Equipment rental', 'Board storage'], addr: 'Παραλία Σχινιά, τμήμα Β' },
-  b25: { ll: '38.1568,23.9631', el: 'Ενοικίαση και service ποδηλάτων, με προτεινόμενες διαδρομές στον κάμπο και προς τη λίμνη.', en: 'Bicycle rental and service, with suggested routes across the plain and up to the lake.', svcEl: ['Ενοικίαση ποδηλάτων', 'Service και επισκευές', 'Χάρτες διαδρομών'], svcEn: ['Bike rental', 'Service and repairs', 'Route maps'], addr: 'Οδός Μαραθωνομάχων 19' }
+  b25: { ll: '38.1568,23.9631', el: 'Ενοικίαση και service ποδηλάτων, με προτεινόμενες διαδρομές στον κάμπο και προς τη λίμνη.', en: 'Bicycle rental and service, with suggested routes across the plain and up to the lake.', svcEl: ['Ενοικίαση ποδηλάτων', 'Service και επισκευές', 'Χάρτες διαδρομών'], svcEn: ['Bike rental', 'Service and repairs', 'Route maps'], addr: 'Οδός Μαραθωνομάχων 19' },
+  b26: { ll: '', el: 'Ο Φούρνος Γκίκα βρίσκεται στο κέντρο του Μαραθώνα και είναι σημείο αναφοράς για αρτοσκευάσματα και γλυκίσματα, με φρέσκα προϊόντα κάθε μέρα από το 1994. Έμφαση στην παραδοσιακή αρτοποιία και τη χειροποίητη παρασκευή: το ψωμί και οι χειροποίητες πίτες είναι οι πιο αγαπημένες επιλογές της γειτονιάς. Οικογενειακός χαρακτήρας, αγνά υλικά και φιλική εξυπηρέτηση.', en: 'Gkikas Bakery sits in the centre of Marathon and is a local reference point for bread and pastries, with fresh products every day since 1994. The focus is traditional baking and handmade preparation: the bread and the handmade pies are the neighbourhood favourites. A family-run shop with honest ingredients and friendly service.', svcEl: ['Ψωμί και ζυμωτό', 'Χειροποίητες πίτες', 'Γλυκά και κουλουράκια'], svcEn: ['Bread and kneaded loaves', 'Handmade pies', 'Sweets and biscuits'], addr: 'Δημοκρατίας 41', photos: ['/images/gkikas-storefront.jpg', '/images/gkikas-building.jpg', '/images/gkikas-shop-biscuits.jpg', '/images/gkikas-shop-sweets.jpg'] },
+  b27: { ll: '', el: 'Το κρεοπωλείο «Η Εύβοια» σερβίρει το τραπέζι των κατοίκων του Μαραθώνα από το 1981, με ελληνικά κρέατα φρέσκα κάθε μέρα: αρνί, κατσίκι, χοιρινό, κοτόπουλο και σπιτικά λουκάνικα. Απλή δουλειά, καθαρό κρέας και κόψιμο όπως το θέλετε.', en: 'Evia Butcher Shop has been putting Greek meat on Marathon tables since 1981, fresh every day: lamb, goat, pork, chicken and homemade sausages. Simple work, good meat, cut the way you want it.', svcEl: ['Ελληνικά κρέατα', 'Κοτόπουλα και λουκάνικα', 'Κόψιμο κατά παραγγελία'], svcEn: ['Greek meat', 'Chicken and sausages', 'Cut to order'], addr: 'Λεωφ. Μαραθώνος 118', photos: ['/images/evia-storefront-night.jpg', '/images/evia-storefront.jpg', '/images/evia-counter.jpg', '/images/evia-counter-portrait.jpg'] },
+  b28: { ll: '', el: 'Πιτσαρία στη Λεωφόρο Μαραθώνος, ανοιχτή κάθε μέρα από το μεσημέρι ως τα μεσάνυχτα. Στον κατάλογο υπάρχουν πίτσα, μακαρονάδες, ριζότο, πεϊνιρλί, καλτσόνε και burger, με δυνατότητα delivery.', en: 'A pizzeria on Leoforos Marathonos, open every day from lunchtime until midnight. The menu covers pizza, pasta, risotto, peinirli, calzone and burgers, with delivery available.', svcEl: ['Πίτσα και μακαρονάδες', 'Ριζότο, πεϊνιρλί, καλτσόνε', 'Burger', 'Delivery'], svcEn: ['Pizza and pasta', 'Risotto, peinirli, calzone', 'Burgers', 'Delivery'], addr: 'Λεωφ. Μαραθώνος 42', photos: ['/images/quattro-oven.jpg', '/images/quattro-pizza.jpg', '/images/quattro-burger.jpg'] }
 };
+
+/** The member's lead photograph, if it has one. */
+export function memberPhoto(m: Member): string | undefined {
+  return MEMBER_DETAILS[m.id]?.photos?.[0];
+}
 
 export function getMember(id: string): Member | undefined {
   return MEMBERS.find((m) => m.id === id);

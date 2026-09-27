@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { memberSlug, type Member } from "@/content/members";
+import { memberPhoto, memberSlug, type Member } from "@/content/members";
 import type { Dictionary } from "@/lib/dictionary";
 import type { Locale } from "@/lib/i18n";
 import { hoursSummary, telHref } from "@/lib/format";
@@ -33,7 +33,7 @@ export function MemberCard({ m, lang, common, variant }: Props) {
     <article className={`${styles.standard} ${compact ? styles.compact : ""} hover-card stretch`}>
       <div className={styles.thumb}>
         <div className={`${styles.thumbInner} hover-zoom`}>
-          <Photo alt={t.name} sizes="84px" />
+          <Photo src={memberPhoto(m)} alt={t.name} sizes="84px" />
         </div>
       </div>
       <div className={styles.standardBody}>
