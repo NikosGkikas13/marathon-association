@@ -27,9 +27,12 @@ function hoursRange(h: string, common: Common): string {
   return h === ALL_DAY ? common.allDay : h.replace("-", "–");
 }
 
-/** "Mon–Sat · 06:30–14:30" — consecutive open days collapse into a run. */
-export function hoursSummary(m: Member, common: Common): string {
-  const days = m.d.split("").map(Number).sort((a, b) => a - b);
+/** The member's hours on one day, as "HH:MM-HH:MM". */
+function hoursOn(m: Member, day: number): string {
+  return m.hDay?.[day] ?? m.h;
+}
+
+function daysLabel(days: number[], common: Common): string {
   const runs: number[][] = [];
   for (const d of days) {
     const last = runs[runs.length - 1];
@@ -37,10 +40,26 @@ export function hoursSummary(m: Member, common: Common): string {
     else runs.push([d]);
   }
   const names = common.days;
-  const label = runs
+  return runs
     .map((r) => (r.length > 1 ? `${names[r[0]]}–${names[r[r.length - 1]]}` : names[r[0]]))
     .join(", ");
-  return `${label} · ${hoursRange(m.h, common)}`;
+}
+
+/**
+ * "Mon–Sat · 06:30–14:30" — consecutive open days collapse into a run. Days
+ * with different hours get their own group: "Mon–Fri · 08:00–21:00, Sat · …".
+ */
+export function hoursSummary(m: Member, common: Common): string {
+  // Groups are ordered Monday first, so a weekday group leads and Sunday comes last.
+  const groups = new Map<string, number[]>();
+  for (const d of [1, 2, 3, 4, 5, 6, 0]) {
+    if (!m.d.includes(String(d))) continue;
+    const h = hoursOn(m, d);
+    groups.set(h, [...(groups.get(h) ?? []), d]);
+  }
+  return [...groups]
+    .map(([h, ds]) => `${daysLabel(ds.sort((a, b) => a - b), common)} · ${hoursRange(h, common)}`)
+    .join(", ");
 }
 
 export type WeekRow = { day: number; label: string; hours: string };
@@ -50,7 +69,7 @@ export function weekHours(m: Member, common: Common): WeekRow[] {
   return [1, 2, 3, 4, 5, 6, 0].map((d) => ({
     day: d,
     label: common.days[d],
-    hours: m.d.includes(String(d)) ? hoursRange(m.h, common) : common.closed,
+    hours: m.d.includes(String(d)) ? hoursRange(hoursOn(m, d), common) : common.closed,
   }));
 }
 
@@ -70,7 +89,7 @@ export function athensNow(date = new Date()): { day: number; minutes: number } {
 
 export function isOpenAt(m: Member, now: { day: number; minutes: number }): boolean {
   if (!m.d.includes(String(now.day))) return false;
-  const [from, to] = m.h.split("-");
+  const [from, to] = hoursOn(m, now.day).split("-");
   const toMin = (s: string) => Number(s.slice(0, 2)) * 60 + Number(s.slice(3, 5));
   const a = toMin(from);
   const z = toMin(to);

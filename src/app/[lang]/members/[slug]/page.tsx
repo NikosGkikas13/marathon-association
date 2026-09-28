@@ -102,6 +102,12 @@ export default async function MemberPage({ params }: PageProps<"/[lang]/members/
             <div className={styles.contact}>
               <span className={styles.addr}>{more?.addr ?? "—"}</span>
               <a href={telHref(m.tel)} className={styles.tel}>{m.tel}</a>
+              {more?.email ? <a href={`mailto:${more.email}`} className={styles.tel}>{more.email}</a> : null}
+              {more?.web ? (
+                <a href={more.web} target="_blank" rel="noopener" className={styles.tel}>
+                  {more.web.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
+                </a>
+              ) : null}
             </div>
           </div>
           <div>

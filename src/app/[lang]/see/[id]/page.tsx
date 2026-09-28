@@ -105,7 +105,6 @@ export default async function PlacePage({ params }: PageProps<"/[lang]/see/[id]"
               <div><dt>{p.admission}</dt><dd className={styles.tbc}>{p.tbc}</dd></div>
             )}
           </dl>
-          {lm.visit ? null : <p className="placeholder-note">{p.placeholderNote}</p>}
         </aside>
       </section>
 

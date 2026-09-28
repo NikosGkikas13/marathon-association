@@ -2,15 +2,16 @@ import Link from "next/link";
 import { Photo } from "@/components/Photo";
 import { Parallax } from "@/components/Parallax";
 import { LandmarkCard } from "@/components/LandmarkCard";
-import { MemberRow } from "@/components/MemberRow";
+import { HomeMembers } from "@/components/HomeMembers";
 import { HERO_IMAGE, LANDMARKS, getLandmark } from "@/content/landmarks";
-import { MEMBER_CATS, getMember } from "@/content/members";
+import { MEMBERS, memberCats, memberPhoto } from "@/content/members";
 import { getDictionary } from "@/lib/dictionary";
 import type { Locale } from "@/lib/i18n";
 import styles from "./home.module.css";
 
 const FEATURED = ["tymbos", "schinias", "museum", "dam"];
-const HOME_MEMBERS = ["b1", "b4", "b8", "b10", "b13", "b24"];
+// Only members with confirmed details, which for now means they sent photos.
+const HOME_MEMBERS = MEMBERS.filter((m) => memberPhoto(m));
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const lang = (await params).lang as Locale;
@@ -104,18 +105,14 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             </Link>
           </div>
           <div className={`${styles.chips} no-scrollbar`}>
-            {MEMBER_CATS.map((c) => (
+            {memberCats(lang).map((c) => (
               <Link key={c.id} href={`/${lang}/members?cat=${c.id}`} className={`tag tag-outline ${styles.chip}`}>
                 {c[lang]}
               </Link>
             ))}
           </div>
         </div>
-        <div className={styles.memberGrid}>
-          {HOME_MEMBERS.map((id) => (
-            <MemberRow key={id} m={getMember(id)!} lang={lang} dict={dict} />
-          ))}
-        </div>
+        <HomeMembers members={HOME_MEMBERS} lang={lang} common={dict.common} className={styles.memberGrid} />
         <Link href={`/${lang}/members`} className={`btn btn-primary btn-block ${styles.mobileOnly} ${styles.allMembers}`}>
           {h.shops.all}
         </Link>

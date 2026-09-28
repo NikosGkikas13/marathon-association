@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
-import { MEMBERS, MEMBER_CATS } from "@/content/members";
+import { MEMBERS, MEMBER_CATS, memberCats } from "@/content/members";
 import type { Dictionary } from "@/lib/dictionary";
 import type { Locale } from "@/lib/i18n";
 import { MemberCard } from "./MemberCard";
@@ -46,18 +46,20 @@ function DirectoryView({
   onCat,
 }: Props & { cat: string; onCat: (id: string) => void }) {
   const [q, setQ] = useState("");
+  // Alphabetical within each category, so no member is placed ahead of another.
+  const members = [...MEMBERS].sort((a, b) => a[lang].localeCompare(b[lang], lang));
   const query = q.trim().toLocaleLowerCase(lang);
   const matches = (m: (typeof MEMBERS)[number]) =>
     !query || `${m.el} ${m.en} ${m.dEl} ${m.dEn}`.toLocaleLowerCase(lang).includes(query);
 
-  const groups = MEMBER_CATS.filter((c) => cat === "all" || c.id === cat)
-    .map((c) => ({ ...c, items: MEMBERS.filter((m) => m.cat === c.id && matches(m)) }))
+  const groups = memberCats(lang).filter((c) => cat === "all" || c.id === cat)
+    .map((c) => ({ ...c, items: members.filter((m) => m.cat === c.id && matches(m)) }))
     .filter((g) => cat !== "all" || g.items.length > 0);
   const noResults = groups.every((g) => g.items.length === 0);
 
   const cats = [
     { id: "all", label: t.allCategories, count: MEMBERS.length },
-    ...MEMBER_CATS.map((c) => ({ id: c.id, label: c[lang], count: MEMBERS.filter((m) => m.cat === c.id).length })),
+    ...memberCats(lang).map((c) => ({ id: c.id, label: c[lang], count: MEMBERS.filter((m) => m.cat === c.id).length })),
   ];
   const catButtons = (className: string) =>
     cats.map((c) => (

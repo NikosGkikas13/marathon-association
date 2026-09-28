@@ -55,9 +55,13 @@
 .numBody { font-size: 13px; opacity: 0.65; }
 
 .columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 48px; margin-top: 64px; }
-.localNote { margin: 0 0 14px; font-size: 12.5px; }
+.localTable { margin-top: 12px; }
 .cellName { padding-left: 0 !important; }
-.cellTel { text-align: right; padding-right: 0 !important; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.localName { display: block; font-weight: 600; margin-bottom: 2px; }
+.localMeta { display: block; font-size: 13px; line-height: 1.45; opacity: 0.7; }
+.localEmail { display: inline-block; margin-top: 2px; font-size: 13px; }
+.cellTel { text-align: right; vertical-align: top; padding-right: 0 !important; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.localTel { color: inherit; }
 
 .practical { display: flex; flex-direction: column; gap: 30px; }
 .para { margin: 0 0 10px; font-size: 15px; line-height: 1.6; }

@@ -44,13 +44,19 @@ export default async function InfoPage({ params }: PageProps<"/[lang]/info">) {
       <div className={styles.columns}>
         <section>
           <h2 className={styles.smallHead}>{t.local}</h2>
-          <p className={`placeholder-note ${styles.localNote}`}>{t.localNote}</p>
-          <table className="table">
+          <table className={`table ${styles.localTable}`}>
             <tbody>
               {t.localRows.map((r) => (
                 <tr key={r.name}>
-                  <td className={styles.cellName}>{r.name}</td>
-                  <td className={styles.cellTel}>{r.tel}</td>
+                  <td className={styles.cellName}>
+                    <span className={styles.localName}>{r.name}</span>
+                    <span className={styles.localMeta}>{r.addr}</span>
+                    {r.hours ? <span className={styles.localMeta}>{r.hours}</span> : null}
+                    {r.email ? <a href={`mailto:${r.email}`} className={styles.localEmail}>{r.email}</a> : null}
+                  </td>
+                  <td className={styles.cellTel}>
+                    <a href={telHref(r.tel)} className={styles.localTel}>{r.tel}</a>
+                  </td>
                 </tr>
               ))}
             </tbody>

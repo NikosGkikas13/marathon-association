@@ -9,7 +9,7 @@ import { Photo } from "./Photo";
 import styles from "./MemberRow.module.css";
 
 /** Compact member listing with a square thumbnail — the home page's shop list. */
-export function MemberRow({ m, lang, dict }: { m: Member; lang: Locale; dict: Dictionary }) {
+export function MemberRow({ m, lang, common }: { m: Member; lang: Locale; common: Dictionary["common"] }) {
   const t = memberText(m, lang);
   return (
     <article className={`${styles.row} hover-card stretch`} data-reveal>
@@ -26,7 +26,7 @@ export function MemberRow({ m, lang, dict }: { m: Member; lang: Locale; dict: Di
         <span className="hover-rule" />
         <span className={styles.desc}>{t.desc}</span>
         <span className={styles.meta}>
-          <OpenState member={m} labels={{ open: dict.common.openNow, closed: dict.common.closedNow }} />
+          <OpenState member={m} labels={{ open: common.openNow, closed: common.closedNow }} />
           <a href={telHref(m.tel)} className={`${styles.tel} above`}>{m.tel}</a>
         </span>
       </div>

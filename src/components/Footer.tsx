@@ -20,7 +20,6 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           <span className={styles.muted}>{f.address}</span>
           <a href={telHref(f.phone)} className={styles.plain}>{f.phone}</a>
           <a href={`mailto:${f.email}`} className={styles.plain}>{f.email}</a>
-          <span className={styles.note}>{f.placeholder}</span>
         </div>
 
         <div className={styles.col}>
