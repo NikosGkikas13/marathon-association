@@ -65,7 +65,7 @@ const el = {
       imgAlt: "Ο Τύμβος των Αθηναίων από ψηλά",
       caption: "Ο Τύμβος των Αθηναίων, 1,4 χλμ. από το κέντρο.",
     },
-    featured: { title: "Τέσσερα να μην χάσετε", all: "Όλα τα σημεία" },
+    featured: { title: "Τέσσερα σημεία που δεν πρέπει να χάσετε", all: "Όλα τα σημεία" },
     shops: {
       title: ["Καταστήματα", "& υπηρεσίες"],
       body: "Επιχειρήσεις-μέλη του συλλόγου. Ο κατάλογος δεν είναι πλήρης λίστα της περιοχής.",
@@ -252,7 +252,7 @@ const en: Dictionary = {
       imgAlt: "The Tomb of the Athenians from above",
       caption: "The Tomb of the Athenians, 1.4 km from the centre.",
     },
-    featured: { title: "Four not to miss", all: "All places" },
+    featured: { title: "Four places you shouldn't miss", all: "All places" },
     shops: {
       title: ["Shops", "& services"],
       body: "Association member businesses. This is not a complete listing of the area.",
